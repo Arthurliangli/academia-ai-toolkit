@@ -61,6 +61,7 @@ def push(rel):
 
 files = [
     "app.py",
+    "requirements.txt",
     "run_tool.command",
     "launch_tool1.command",
     "push_to_github.command",
