@@ -8,7 +8,10 @@ Supports three AI providers:
   - Google Gemini     (free tier for personal Gmail in supported regions)
 """
 
+import os
 import streamlit as st
+from dotenv import load_dotenv
+load_dotenv()  # loads GROQ_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY from .env if present
 
 # ── Model options ──────────────────────────────────────────────────────────────
 GROQ_MODELS = {
@@ -67,9 +70,10 @@ def setup_sidebar(tool_name: str, tool_description: str) -> tuple[str | None, st
             )
             api_key = st.text_input(
                 "Groq API Key",
+                value=os.getenv("GROQ_API_KEY", ""),
                 type="password",
                 placeholder="gsk_...",
-                help="Free key from console.groq.com. Never stored.",
+                help="Free key from console.groq.com. Save in .env to pre-fill.",
             )
             model_label = st.selectbox("Choose model", list(GROQ_MODELS.keys()))
             model_id = GROQ_MODELS[model_label]
@@ -82,9 +86,10 @@ def setup_sidebar(tool_name: str, tool_description: str) -> tuple[str | None, st
             )
             api_key = st.text_input(
                 "Anthropic API Key",
+                value=os.getenv("ANTHROPIC_API_KEY", ""),
                 type="password",
                 placeholder="sk-ant-...",
-                help="Your key is never stored.",
+                help="Save in .env to pre-fill.",
             )
             model_label = st.selectbox("Choose model", list(CLAUDE_MODELS.keys()))
             model_id = CLAUDE_MODELS[model_label]
@@ -98,9 +103,10 @@ def setup_sidebar(tool_name: str, tool_description: str) -> tuple[str | None, st
             )
             api_key = st.text_input(
                 "Google AI Studio API Key",
+                value=os.getenv("GEMINI_API_KEY", ""),
                 type="password",
                 placeholder="AIza...",
-                help="Free key from aistudio.google.com. Never stored.",
+                help="Save in .env to pre-fill.",
             )
             model_label = st.selectbox("Choose model", list(GEMINI_MODELS.keys()))
             model_id = GEMINI_MODELS[model_label]
