@@ -30,9 +30,9 @@ Most AI tools are built for coders. This toolkit is built for faculty — people
 
 ## ⚡ Quick Start (5 minutes)
 
-### Step 1 — Get an API key (free to start)
+### Step 1 — Get an API key
 
-These tools use the **Anthropic Claude API**. You can get a free API key at [console.anthropic.com](https://console.anthropic.com). New accounts get free credits.
+These tools use the **Anthropic Claude API** or **Google Gemini API**. Get a Claude key at [console.anthropic.com](https://console.anthropic.com) (credits ~$0.01–0.05/session), or a Gemini key at [aistudio.google.com](https://aistudio.google.com) (free tier available for personal Gmail accounts in supported regions).
 
 ### Step 2 — Install Python (one time only)
 
