@@ -17,13 +17,14 @@ load_dotenv()  # loads GROQ_API_KEY, ANTHROPIC_API_KEY, GEMINI_API_KEY from .env
 GROQ_MODELS = {
     "Llama 3.3 70B (FREE — best quality)": "llama-3.3-70b-versatile",
     "Llama 3.1 8B  (FREE — fastest)": "llama-3.1-8b-instant",
-    "Mixtral 8x7B  (FREE — long context)": "mixtral-8x7b-32768",
+    "GPT OSS 120B (FREE — strong reasoning)": "openai/gpt-oss-120b",
+    "GPT OSS 20B  (FREE — fast reasoning)": "openai/gpt-oss-20b",
 }
 
 CLAUDE_MODELS = {
-    "Claude Sonnet (Recommended — fast & smart)": "claude-sonnet-4-5",
+    "Claude Sonnet (Recommended — fast & smart)": "claude-sonnet-4-6",
     "Claude Haiku  (Fastest — good for simple tasks)": "claude-haiku-4-5-20251001",
-    "Claude Opus   (Most powerful — slower)": "claude-opus-4-5",
+    "Claude Opus   (Most powerful — slower)": "claude-opus-4-8",
 }
 
 GEMINI_MODELS = {
@@ -38,7 +39,7 @@ def setup_sidebar(tool_name: str, tool_description: str) -> tuple[str | None, st
     """
     Renders the standard sidebar with provider selector, API key input, and model.
     Returns (api_key, model_id).
-    Routing: model starts with 'llama'/'mixtral' → Groq; 'gemini' → Google; else → Anthropic.
+    Routing: Groq model IDs → Groq; 'gemini' → Google; else → Anthropic.
     """
     with st.sidebar:
         st.title("🎓 Academia AI Toolkit")
@@ -157,11 +158,11 @@ def call_claude(
 ) -> str:
     """
     Routes to the correct provider based on model name:
-      - llama* / mixtral* / gemma* → Groq
+      - llama* / openai/gpt-oss* / meta-llama* / qwen* / groq* → Groq
       - gemini* → Google
       - everything else → Anthropic
     """
-    if model.startswith(("llama", "mixtral", "gemma")):
+    if model.startswith(("llama", "openai/gpt-oss", "meta-llama", "qwen", "groq")):
         return _call_groq(api_key, model, system_prompt, user_message, max_tokens)
     elif model.startswith("gemini"):
         return _call_gemini(api_key, model, system_prompt, user_message, max_tokens)
